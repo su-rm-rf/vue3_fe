@@ -1,0 +1,81 @@
+.todo_app {
+  width: 90vw;
+  margin: .4rem auto;
+  .todo_add {
+    display: flex;
+    align-items: center;
+    textarea {
+      flex: 4;
+      min-height: 2rem;
+      padding: .1rem;
+      margin-right: .4rem;
+    }
+    button {
+      flex: 1;
+      height: .6rem;
+    }
+  }
+  .todo_filter {
+    display: flex;
+    li {
+      line-height: .6rem;
+      margin: .2rem;
+      padding: .2rem;
+      font-size: .28rem;
+      background: #eee;
+      &:first-child {
+        margin-left: 0;
+      }
+      &.active {
+        color: #f00;
+      }
+    }
+  }
+  .todo_list {
+    li {
+      line-height: .8rem;
+      display: flex;
+      justify-content: space-between;
+      &.completed {
+        .text {
+          text-decoration: line-through;
+        }
+      }
+      .handler {
+        a, button {
+          margin: 0 .2rem;
+          font-size: .26rem;
+        }
+      }
+    }
+    > button {
+      margin-top: 3vh;
+    }
+  }
+}
+.todo_detail {
+  width: 90vw;
+  margin: .4rem auto;
+  line-height: .8rem;
+  li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    label {
+      flex: 1;
+    }
+    textarea, span {
+      flex: 2;
+    }
+    textarea {
+      min-height: 2rem;
+      padding: .1rem;
+    }
+    button {
+      line-height: .8rem;
+      width: 100%;
+      font-size: .4rem;
+      margin-top: .4rem;
+    }
+  }
+}

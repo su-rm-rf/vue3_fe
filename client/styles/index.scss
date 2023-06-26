@@ -1,0 +1,58 @@
+@import './reset.scss';
+@import './variables.scss';
+
+body {
+  font-size: .32rem;
+}
+
+.app {
+  .loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,.5);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .header {
+    height: var(--header-height, 2rem);
+    background: #ea2;
+  }
+  .body {
+    height: calc(100vh - var(--header-height));
+    display: flex;
+    .nav_aside {
+      width: 10vw;
+      min-height: calc(100vh - var(--header-height));
+      background: #2ae;
+      overflow-y: auto;
+      li {
+        line-height: .6rem;
+        text-indent: .4rem;
+        a {
+          &.router-link-active {
+            color: #f00;
+          }
+        }
+      }
+    }
+    .main_body {
+      width: 90vw;
+      overflow-y: auto;
+      .section {
+        min-height: calc(100vh - var(--header-height) - var(--footer-height));
+        background: #ae2;
+      }
+      .footer {
+        height: var(--footer-height);
+        background: #e2a;
+      }
+    }
+  }
+}
+
+@import './todo.scss';
