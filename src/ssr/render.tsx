@@ -29,7 +29,7 @@ function renderFullPage(html, preloadedState) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title></title>
         <link rel="icon" href="/vue.ico" />
-        <link rel="stylesheet" href="/admin/main.css?${Math.random()}" />
+        <link rel="stylesheet" href="/main.css?${Math.random()}" />
       </head>
       <body>
         <div id="root">${html}</div>
@@ -46,7 +46,7 @@ function renderFullPage(html, preloadedState) {
             '\\u003c'
           )}
         </script>
-        <script src="/admin/client.bundle.js"></script>
+        <script src="/client.bundle.js"></script>
       </body>
     </html>
   `

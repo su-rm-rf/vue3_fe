@@ -14,7 +14,7 @@
 
   const signin = () => {
     if (user.username && user.password) {
-      axios.post('http://localhost:7570/admin/user/signin', {
+      axios.post('http://192.168.1.4:7570/admin/user/signin', {
         username: user.username,
         password: user.password,
       }).then(res => {
