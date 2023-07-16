@@ -1,5 +1,5 @@
 import constants from '@/constants'
-import axios from '@/utils/axios'
+import { instance2 } from '@/utils/axios'
 
 export default {
   todo_set: ({ commit }, text) => {
@@ -9,7 +9,7 @@ export default {
   todo_get: ({ state, commit }, filter) => {
     filter = filter || state.filter
     commit(constants.SHOW_LOADING, true, { root: true })
-    axios.get(`/todo/list?completed=${filter}`).then(res => {
+    instance2.get(`/todo/list?completed=${filter}`).then(res => {
       commit(constants.TODO_GET, res.data.data)
       commit(constants.SHOW_LOADING, false, { root: true })
     })
@@ -18,7 +18,7 @@ export default {
   todo_detail: ({ commit }, id) => {
     commit(constants.TODO_DETAIL_START)
     commit(constants.SHOW_LOADING, true, { root: true })
-    axios.get(`/todo/${id}`).then(res => {
+    instance2.get(`/todo/${id}`).then(res => {
       commit(constants.TODO_DETAIL, res.data.data)
       commit(constants.SHOW_LOADING, false, { root: true })
     })
@@ -26,7 +26,7 @@ export default {
 
   todo_add: ({ commit, dispatch }, text) => {
     commit(constants.SHOW_LOADING, true, { root: true })
-    axios.post('/todo/add', {
+    instance2.post('/todo/add', {
       text,
       completed: 0
     }).then(res => {
@@ -38,7 +38,7 @@ export default {
   todo_save: ({ commit }, todo) => {
     commit(constants.SHOW_LOADING, true, { root: true })
     return new Promise<void>((resolve, reject) => {
-      axios.post('/todo/update', todo).then(res => {
+      instance2.post('/todo/update', todo).then(res => {
         commit(constants.SHOW_LOADING, false, { root: true })
         resolve()
       })
@@ -49,7 +49,7 @@ export default {
     // filter = filter === constants.SHOW_ALL ? '' : filter
     commit(constants.TODO_FILTER, filter)
     commit(constants.SHOW_LOADING, true, { root: true })
-    axios.get(`/todo/list?completed=${filter}`).then(res => {
+    instance2.get(`/todo/list?completed=${filter}`).then(res => {
       commit(constants.TODO_GET, res.data.data)
       commit(constants.SHOW_LOADING, false, { root: true })
     })
@@ -57,7 +57,7 @@ export default {
   
   todo_toggle: ({ state, commit, dispatch }, todo) => {
     commit(constants.SHOW_LOADING, true, { root: true })
-    axios.post('/todo/update', {
+    instance2.post('/todo/update', {
       id: todo.id,
       completed: todo.completed === 0 ? 1 : 0
     }).then(res => {
@@ -68,7 +68,7 @@ export default {
 
   todo_delete: ({ commit, dispatch }, id) => {
     commit(constants.SHOW_LOADING, true, { root: true })
-    axios.post('/todo/delete', {
+    instance2.post('/todo/delete', {
       id
     }).then(res => {
       commit(constants.SHOW_LOADING, false, { root: true })
@@ -78,7 +78,7 @@ export default {
 
   todo_clear: ({ commit, dispatch }) => {
     commit(constants.SHOW_LOADING, true, { root: true })
-    axios.post('/todo/clear').then(res => {
+    instance2.post('/todo/clear').then(res => {
       commit(constants.SHOW_LOADING, false, { root: true })
       dispatch('todo_get')
     })

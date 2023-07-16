@@ -1,19 +1,15 @@
 <script lang="ts" setup>
-  import { ref } from 'vue'
-  import { useRoute, useRouter } from 'vue-router'
-
-  import axios from 'axios'
+  import { useRoute } from 'vue-router'
+  import { useState, useActions } from '@/hooks'
 
   const route = useRoute()
-  const router = useRouter()
+  
+  const { detail }: any = useState('category', ['detail'])
+  const { getCategoryDetail }: any = useActions('category', ['getCategoryDetail'])
 
   const { id } = route.params
+  getCategoryDetail(id)
 
-  let detail:any = ref([])
-  axios.get(`http://localhost:7570/admin/category/detail/${ id }`).
-    then(res => {
-      detail.value = res.data
-    })
 </script>
 
 <template>

@@ -1,8 +1,10 @@
 import { createStore } from "vuex"
-import actions from "./actions"
-import getters from "./getters"
-import mutations from "./mutations"
 
+import actions from "./actions"
+import mutations from "./mutations"
+import getters from "./getters"
+
+import category from './category'
 import todo from './todo'
 
 export const getStore = (preloadedState) => {
@@ -12,13 +14,15 @@ export const getStore = (preloadedState) => {
       return {
         ...preloadedState,
         loading: false,
+        token: '',
       }
     },
+    actions,
     mutations,
     getters,
-    actions,
 
     modules: {
+      category,
       todo,
     }
   })

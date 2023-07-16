@@ -33,14 +33,14 @@ const routes:any = [
         path: '/todo/:id',
         component: () => import('@/components/todo/Detail.vue'),
         meta: {
-          auth: true
+          requiresAuth: true
         }
       },
       {
         path: '/todo/edit/:id',
         component: () => import('@/components/todo/Edit.vue'),
         meta: {
-          auth: true
+          requiresAuth: true
         }
       },
       {
@@ -48,7 +48,7 @@ const routes:any = [
         component: () => import('@/components/common/About.vue')
       },
       {
-        path: '/*',
+        path: '/:pathMatch(.*)*',
         component: () => import('@/components/common/404.vue')
       },
     ]
@@ -68,6 +68,11 @@ router.beforeEach(async (to, from, next) => {
   } else {
     next()
   }
+})
+
+router.beforeResolve((to, from, next) => {
+  console.log(to, from)
+  next()
 })
 
 export default router

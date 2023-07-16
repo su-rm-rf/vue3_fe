@@ -34,20 +34,7 @@ module.exports = {
             options: {
               postcssOptions: {
                 plugins: [
-                  ['postcss-preset-env', {
-                      browsers: [
-                        'defaults',
-                        'not ie < 9',
-                        'last 7 versions',
-                        '> 1%',
-                        'iOS >= 8',
-                        'last 5 iOS versions',
-                        'android >= 6.0',
-                        // 'not dead',
-                        // 'not op_mini all',
-                      ]
-                    }
-                  ]
+                  ['postcss-preset-env']
                 ]
               }
             }

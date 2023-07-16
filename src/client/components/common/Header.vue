@@ -3,14 +3,16 @@
 
   const { handleSignout } = defineProps(['handleSignout'])
 
-  const token = JSON.parse(localStorage.token)
-  const user:any = ref(token.data)
+  const token = localStorage.token
+  const info = JSON.parse(atob(token.split('.')[1]))
+  
+  const user:any = ref(info)
+
   const roles = { 0: '超级管理员', 1: '管理员', 2: '用户' }
 
   const signout = () => {
-    const token = ''
-    localStorage.token = token
-    handleSignout(token)
+    localStorage.removeItem('token')
+    handleSignout()
   }
 </script>
 

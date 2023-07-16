@@ -10,7 +10,15 @@ import App from '@/App.vue'
 const store = getStore((window as any).__PRELOADED_STATE__)
 delete (window as any).__PRELOADED_STATE__
 
-createSSRApp(App)
-.use(store)
+const app = createSSRApp(App)
+
+app.use(store)
 .use(router)
-.mount('#root')
+
+app.mount('#root')
+
+app.config.errorHandler = (err) => {
+
+}
+
+// app.component('', xx)

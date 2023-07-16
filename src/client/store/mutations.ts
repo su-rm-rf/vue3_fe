@@ -1,4 +1,4 @@
-import constants from "@/constants";
+import constants from "@/constants"
 
 export default {
   [constants.TODO_GET_START](state) {
@@ -9,5 +9,9 @@ export default {
   },
   [constants.SHOW_LOADING](state, show) {
     state.loading = show
+  },
+
+  signin(state, payload) {
+    state.token = payload.token
   },
 }

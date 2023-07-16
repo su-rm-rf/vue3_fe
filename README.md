@@ -21,3 +21,6 @@ node:
   @types/express
 
 # 构建
+
+# SSR
+目的：首屏加载，SEO

@@ -6,7 +6,7 @@ import constants from '@/constants'
 
 const Todo = {
   namespaced: true,
-  strict: process.env.NODE_ENV !== 'production',
+  strict: process.env.NODE_ENV == 'development',
   state() {
     return {
       _todo: {
@@ -19,15 +19,9 @@ const Todo = {
     }
   },
 
-  getters: {
-    ...getters
-  },
-  mutations: {
-    ...mutations
-  },
-  actions: {
-    ...actions
-  }, 
+  getters,
+  mutations,
+  actions,
 }
 
 export default Todo

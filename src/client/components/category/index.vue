@@ -1,32 +1,40 @@
 <script lang="ts" setup>
   import { ref } from 'vue'
-  import { useRouter } from 'vue-router'
+  import { useRoute, useRouter } from 'vue-router'
+  import { useState, useActions } from '@/hooks'
 
-  import axios from 'axios'
-
+  const route = useRoute()
   const router = useRouter()
 
-  let list = ref([])
-  axios.get('http://localhost:7570/admin/category/list').
-    then(res => {
-      list.value = res.data
-    })
-  
+  const { list }: any = useState('category', ['list'])
+  console.log(list.length)
+  const { getCategoryList }: any = useActions('category', ['getCategoryList'])
+
+  getCategoryList()
+
+  let loading = ref(false)
   const detail_row = (id) => {
-    router.push(`/category/${ id }`)
+    loading.value = !loading.value
+    // router.push(`/category/${ id }`)
   }
+
   const delete_row = (id) => {
   }
 </script>
 
 <template>
   <div>
+    a{{list.length}}b
+    <Transition name="loading">
+      <span v-if="!list.length">加载中1</span>
+    </Transition>
+    <span v-if="loading">加载中2</span>
     <ul class="category_list">
       <li class="category_list_header">
-        <label>二级品类ID</label>
-        <label>二级品类名称</label>
-        <label>一级品类价格</label>
-        <label>一级品类名称</label>
+        <label>商品ID</label>
+        <label>商品名称</label>
+        <label>商品价格（{{ list[0].goods_list[0].bill }}）</label>
+        <label>所属品类</label>
         <label>操作</label>
       </li>
       <li v-for="category in list" class="category_list_row">
@@ -48,6 +56,13 @@
 </template>
 
 <style lang="scss">
+  .loading-enter-active, .loading-leave-active {
+    transition: opacity 1s ease;
+  }
+  .loading-enter-from, .loading-leave-to {
+    opacity: 0;
+  }
+  
   .category_list {
     text-align: center;
     &_header {

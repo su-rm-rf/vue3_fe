@@ -1,31 +1,32 @@
 <script lang="ts" setup>
   import { ref, reactive } from 'vue'
   import { useRouter } from 'vue-router'
-  import axios from 'axios'
-  import { useState } from '@/hooks'
+  import { useState, useActions } from '@/hooks'
 
   const router = useRouter()
+  
   const { loading }: any = useState(['loading'])
+  const { token }: any = useState(['token'])
+  const { signinHandler }: any = useActions(['signinHandler'])
+
   const user = reactive({
-    username: '',
-    password: '',
+    username: 'yuhualing',
+    password: 'abc123',
   })
   let errmsg:any = ref('')
 
-  const signin = () => {
+  const signin = async () => {
     if (user.username && user.password) {
-      axios.post('http://192.168.1.4:7570/admin/user/signin', {
+      const token = await signinHandler({
         username: user.username,
         password: user.password,
-      }).then(res => {
-        const token = res.data
-        if (token) {
-          localStorage.token = JSON.stringify(token)
-          router.replace('/')
-        } else {
-          errmsg.value = '用户名或密码错误'
-        }
       })
+      if (token) {
+        localStorage.token = JSON.stringify(token)
+        router.replace('/')
+      } else {
+        errmsg.value = '用户名或密码错误'
+      }
     } else {
       errmsg.value = '用户名或密码不能为空'
     }
