@@ -12,6 +12,6 @@ export default {
   },
 
   signin(state, payload) {
-    state.token = payload.token
+    state.token = payload.data?.token
   },
 }

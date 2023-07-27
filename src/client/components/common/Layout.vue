@@ -15,6 +15,8 @@
 <template>
   <div>
     <Header :handleSignout="signoutCb" />
+    <!-- <component :is="Header" @handleSignout="signoutCb"></component> -->
+    <!-- <Header @handleSignout="signoutCb" /> -->
     <div class="body">
       <Menu />
       <div class="main_body">

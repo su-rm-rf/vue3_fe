@@ -33,18 +33,21 @@ a {
   text-decoration: none;
   color: initial;
 }
-blockquote, q {
-  quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-  content: \'\';
-  content: none;
-}
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 textarea {
   resize: none;
+}
+.clear::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
 }

@@ -1,7 +1,10 @@
 <script lang="ts" setup>
-  import { ref } from 'vue'
+  import { ref, inject } from 'vue'
 
-  const { handleSignout } = defineProps(['handleSignout'])
+  const props = defineProps<{
+    handleSignout: Function,
+  }>()
+  const emit = defineEmits(['handleSignout'])
 
   const token = localStorage.token
   const info = JSON.parse(atob(token.split('.')[1]))
@@ -12,14 +15,18 @@
 
   const signout = () => {
     localStorage.removeItem('token')
-    handleSignout()
+    props.handleSignout()
   }
+
+  const i18n: any = inject('i18n')
+  console.log(i18n.youyuxi.chinese)
 </script>
 
 <template>
-  <div class="header">
+  <div class="header">{{ $translate('youyuxi.chinese') }}
     欢迎~ <em>{{ roles[user.level] }}</em>{{ user.username }}
     <button @click="signout">退出</button>
+    <button @click="$emit('handleSignout')">退出</button>
   </div>
 </template>
 

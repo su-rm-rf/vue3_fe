@@ -10,7 +10,6 @@ export default {
     const token = res.data?.data?.token
     if (token) {
       localStorage.setItem('token', token)
-      instance2.defaults.headers.common['Authorization'] = token
       commit('signin', token)
     }
     return token
